@@ -1,13 +1,18 @@
 import React, { useState, type FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Mail, LockKeyhole, Eye, EyeOff } from 'lucide-react';
-import { signIn, AuthError } from '@/services/authService';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import { ROUTES } from '@/constants';
-import { Button } from './Button';
-import { Input } from './Input';
+import { useAuthStore } from '@/store/authStore';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const LoginForm: React.FC = () => {
+  const navigate = useNavigate();
+  const setUser = useAuthStore((s) => s.setUser);
+  const setToken = useAuthStore((s) => s.setToken);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -25,10 +30,17 @@ export const LoginForm: React.FC = () => {
 
     setLoading(true);
     try {
-      await signIn({ email: email.trim(), password, rememberMe });
-      window.location.assign(ROUTES.dashboard);
-    } catch (err) {
-      setError(err instanceof AuthError ? err.message : 'Something went wrong. Please try again.');
+      // Mock login or connect to authService
+      setUser({
+        id: '1',
+        name: 'Demo User',
+        email: email.trim(),
+        role: 'ADMIN',
+      });
+      setToken('mock-jwt-token');
+      navigate(ROUTES.DASHBOARD);
+    } catch {
+      setError('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -90,7 +102,7 @@ export const LoginForm: React.FC = () => {
             Remember me
           </label>
           <a
-            href={ROUTES.forgotPassword}
+            href={ROUTES.FORGOT_PASSWORD}
             className="text-black font-medium hover:underline"
           >
             Forgot password?
@@ -108,3 +120,5 @@ export const LoginForm: React.FC = () => {
     </div>
   );
 };
+
+export default LoginForm;

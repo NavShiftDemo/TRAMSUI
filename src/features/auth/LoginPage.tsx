@@ -1,7 +1,7 @@
 import React from 'react';
 import { CarFront, MapPin, BarChart3 } from 'lucide-react';
-import { Navbar } from '@/components/Navbar';
-import { LoginForm } from '@/components/LoginForm';
+import { Navbar } from '@/components/common/Navbar';
+import { LoginForm } from './components/LoginForm';
 import { VIDEO_SRC, POSTER_SRC } from '@/constants';
 
 export const LoginPage: React.FC = () => {
@@ -69,3 +69,5 @@ export const LoginPage: React.FC = () => {
     </div>
   );
 };
+
+export default LoginPage;

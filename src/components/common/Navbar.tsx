@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
         {['Dashboard', 'Features', 'About', 'Contact'].map((l) => (
           <a
             key={l}
-            href={l === 'Dashboard' ? ROUTES.dashboard : `#${l.toLowerCase()}`}
+            href={l === 'Dashboard' ? ROUTES.DASHBOARD : `#${l.toLowerCase()}`}
             className="hover:text-black transition-colors"
           >
             {l}
@@ -21,7 +21,7 @@ export const Navbar: React.FC = () => {
         ))}
       </div>
       <a
-        href={ROUTES.register}
+        href={ROUTES.REGISTER}
         className="ml-auto sm:ml-0 bg-black text-white text-sm font-medium px-4 sm:px-5 py-2 rounded-xl hover:bg-gray-800 transition-colors"
       >
         Create Account
@@ -29,3 +29,5 @@ export const Navbar: React.FC = () => {
     </nav>
   );
 };
+
+export default Navbar;
